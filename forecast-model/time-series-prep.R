@@ -56,10 +56,13 @@ print(p)
 # Seasonality
 #----------------
 
+some_colours <- c("#25388E", "#57DBD8", "#F9B8B1", "#F84791")
+
 p2 <- ggseasonplot(filt_ts, year.labels = TRUE, year.labels.left = TRUE) +
   labs(title = "Seasonal plot",
        x = "Month",
        y = "Number of go card trips") +
+  scale_colour_manual(values = some_colours) +
   the_theme
 print(p2)
 
@@ -73,3 +76,7 @@ p3 <- ggAcf(filt_ts) +
        y = "ACF") +
   the_theme
 print(p3)
+
+#------------------------SAVE DATA FOR MODELLING USE----------
+
+save(filtered, file = "data/for-modelling.Rda")
