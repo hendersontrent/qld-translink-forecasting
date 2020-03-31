@@ -12,3 +12,7 @@ library(data.table)
 library(readxl)
 library(janitor)
 library(forecast)
+
+# Turn of scientific notation
+
+options(scipen = 999)
