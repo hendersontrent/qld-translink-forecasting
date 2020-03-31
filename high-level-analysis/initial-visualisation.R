@@ -62,7 +62,8 @@ the_theme <-   theme(legend.position = "bottom",
 
 # Produce graph
 
-clean_data %>%
+CairoPNG("output/initial-ts-graph.png", 550, 350)
+p <- clean_data %>%
   ggplot(aes(x = month, y = quantity, group = ticket_type)) +
   geom_line(aes(colour = ticket_type), stat = "identity", size = 1.25) +
   labs(title = "Time series of ticket type for TransLink services",
@@ -75,3 +76,6 @@ clean_data %>%
   facet_grid(. ~ year, scale = "free_x", switch = "x") +
   theme_bw() +
   the_theme
+print(p)
+
+dev.off()
