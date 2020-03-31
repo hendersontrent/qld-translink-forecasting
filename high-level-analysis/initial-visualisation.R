@@ -14,7 +14,7 @@ load("data/full_data.Rda")
 
 # Get structure of data as opening it is computationally intensive due to size
 
-structure(full_data)
+glimpse(full_data)
 
 #------------------------DATA SUMMARISATION-----------------------
 
@@ -33,32 +33,8 @@ clean_data <- full_data %>%
 
 # Produce reusable graphing components
 
-the_caption <- "Source: TransLink, Orbisant Analysis"
-
 the_palette <- c("Paper" = "#57DBD8",
                  "go card" = "#F84791")
-
-the_theme <-   theme(legend.position = "bottom",
-                     axis.text = element_text(colour = "#25388E"),
-                     axis.title = element_text(colour = "#25388E", face = "bold"),
-                     panel.grid.minor = element_blank(),
-                     panel.grid.major = element_line(colour = "white"),
-                     panel.border = element_blank(),
-                     axis.line = element_line(colour = "#25388E"),
-                     panel.background = element_rect(fill = "#edf0f3", colour = "#edf0f3"),
-                     plot.background = element_rect(fill = "#edf0f3", colour = "#edf0f3"),
-                     legend.background = element_rect(fill = "#edf0f3", colour = "#edf0f3"),
-                     legend.box.background = element_rect(fill = "#edf0f3", colour = "#edf0f3"),
-                     legend.key = element_rect(fill = "#edf0f3", colour = "#edf0f3"),
-                     legend.text = element_text(colour = "#25388E"),
-                     legend.title = element_text(colour = "#25388E"),
-                     plot.title = element_text(colour = "#25388E"),
-                     plot.subtitle = element_text(colour = "#25388E"),
-                     plot.caption = element_text(colour = "#25388E"),
-                     strip.placement = "outside",
-                     strip.background = element_rect(fill = "#edf0f3", colour = "#25388E"),
-                     strip.text = element_text(colour = "#25388E"),
-                     panel.spacing.x = unit(0, "lines"))
 
 # Produce graph
 
