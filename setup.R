@@ -13,6 +13,7 @@ library(readxl)
 library(janitor)
 library(forecast)
 library(scales)
+library(Cairo)
 
 # Turn of scientific notation
 
