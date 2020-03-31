@@ -28,9 +28,15 @@ filtered <- full_data %>%
   mutate(year = as.numeric(gsub("-.*", "", month))) %>%
   mutate(month = as.Date(paste(month, "-01", sep = "")))
 
+# Produce time series object
+
+filt_ts <- ts(filtered$quantity, start = c(2016,4), end = c(2019,12), frequency = 12)
+
 #------------------------TIME SERIES DIAGNOSTICS--------------
 
+#----------------
 # Time
+#----------------
 
 p <- filtered %>%
   ggplot(aes(x = month, y = quantity)) +
@@ -46,9 +52,9 @@ p <- filtered %>%
   the_theme
 print(p)
 
+#----------------
 # Seasonality
-
-filt_ts <- ts(filtered$quantity, start = c(2016,4), end = c(2019,12), frequency = 12)
+#----------------
 
 p2 <- ggseasonplot(filt_ts, year.labels = TRUE, year.labels.left = TRUE) +
   labs(title = "Seasonal plot",
@@ -57,6 +63,13 @@ p2 <- ggseasonplot(filt_ts, year.labels = TRUE, year.labels.left = TRUE) +
   the_theme
 print(p2)
 
+#----------------
 # Autocorrelation
+#----------------
 
-ggAcf(filtered)
+p3 <- ggAcf(filt_ts) +
+  labs(title = "Autocorrelation plot",
+       x = "Lag",
+       y = "ACF") +
+  the_theme
+print(p3)
