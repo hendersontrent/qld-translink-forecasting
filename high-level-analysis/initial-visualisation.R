@@ -25,7 +25,8 @@ clean_data <- full_data %>%
   filter(!is.na(ticket_type)) %>%
   group_by(ticket_type, month) %>%
   summarise(quantity = round((sum(quantity))/1000000, digits = 2)) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(month = as.Date(paste(month, "-01", sep = "")))
 
 #------------------------DATA VISUALISATION-----------------------
 
@@ -64,5 +65,6 @@ clean_data %>%
        y = "Number of trips (millions)",
        colour = "Ticket type",
        caption = the_caption) +
+  scale_x_date(date_labels = "%b\n%Y", breaks = date_breaks("2 months")) +
   theme_bw() +
   the_theme
