@@ -15,6 +15,14 @@ library(forecast)
 library(scales)
 library(Cairo)
 
+# Load in useful functions
+
+funcs <- list.files("R", pattern = "\\.[Rr]$", full.names = TRUE)
+
+for(f in funcs){
+  source(f)
+}
+
 # Turn of scientific notation
 
 options(scipen = 999)
