@@ -26,6 +26,7 @@ clean_data <- full_data %>%
   group_by(ticket_type, month) %>%
   summarise(quantity = round((sum(quantity))/1000000, digits = 2)) %>%
   ungroup() %>%
+  mutate(year = as.numeric(gsub("-.*", "", month))) %>%
   mutate(month = as.Date(paste(month, "-01", sep = "")))
 
 #------------------------DATA VISUALISATION-----------------------
@@ -53,7 +54,11 @@ the_theme <-   theme(legend.position = "bottom",
                      legend.title = element_text(colour = "#25388E"),
                      plot.title = element_text(colour = "#25388E"),
                      plot.subtitle = element_text(colour = "#25388E"),
-                     plot.caption = element_text(colour = "#25388E"))
+                     plot.caption = element_text(colour = "#25388E"),
+                     strip.placement = "outside",
+                     strip.background = element_rect(fill = "#edf0f3", colour = "#25388E"),
+                     strip.text = element_text(colour = "#25388E"),
+                     panel.spacing.x = unit(0, "lines"))
 
 # Produce graph
 
@@ -62,9 +67,11 @@ clean_data %>%
   geom_line(aes(colour = ticket_type), stat = "identity", size = 1.25) +
   labs(title = "Time series of ticket type for TransLink services",
        x = "Date",
-       y = "Number of trips (millions)",
+       y = "Number of trips (million)",
        colour = "Ticket type",
        caption = the_caption) +
-  scale_x_date(date_labels = "%b\n%Y", breaks = date_breaks("2 months")) +
+  scale_x_date(labels = date_format("%b"), expand = c(0, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x,"m")) +
+  facet_grid(. ~ year, scale = "free_x", switch = "x") +
   theme_bw() +
   the_theme
