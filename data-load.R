@@ -13,12 +13,12 @@ data_files <- list.files("data", full.names = TRUE, pattern = "\\.xlsx", all.fil
 
 data.list <- list()
 
-for(i in data_files){
+for(d in data_files){
   df <- read_excel(d)
-  data.list[[i]] <- df
+  data.list[[d]] <- df
 }
 
-full_data <- rbindlist(data.list, use.names = TRUE)
+full_data <- rbindlist(data.list, use.names = TRUE, fill = TRUE)
 
 # Save file for future use
 
