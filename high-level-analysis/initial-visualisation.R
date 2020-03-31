@@ -1,6 +1,7 @@
 #--------------------------------------------
-# This script sets out to load and clean raw
-# data files and save as a quick-access .Rda
+# This script sets out to produce a first
+# high level visual of the data to check
+# for potential considerations for modelling
 #--------------------------------------------
 
 #---------------------------------------
