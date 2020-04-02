@@ -39,3 +39,19 @@ p <- autoplot(filt_ts) +
   the_theme +
   theme(legend.position = "bottom")
 print(p)
+
+#----------------
+# MONTHLY VERSUS
+# DAILY AVERAGE
+# TO CONTROL FOR
+# LONGER MONTHS
+#----------------
+
+dframe <- cbind(Monthly = filt_ts,
+                DailyAverage = filt_ts/monthdays(filt_ts))
+
+autoplot(dframe, facet = TRUE) +
+  labs(title = "",
+       x = "Years",
+       y = "Number of go card trips") +
+  the_theme
