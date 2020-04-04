@@ -37,7 +37,7 @@ clean_forecast <- outputs %>%
 clean_forecast <- mutate(clean_forecast, id = rownames(clean_forecast))
 
 cleaner_forecast <- as.data.frame(clean_forecast) %>%
-  mutate(year = as.numeric(as.character(year))) %>%
+  mutate(year = as.numeric(as.character(year))) %>% # These type recoding lines fix ts binding error
   mutate(quantity = as.numeric(as.character(quantity))) %>%
   mutate(the_lower = as.numeric(as.character(the_lower))) %>%
   mutate(the_upper = as.numeric(as.character(the_upper))) %>%
@@ -66,7 +66,8 @@ historical <- filtered %>%
   mutate(month = as.character(month))
 
 full_data <- bind_rows(historical, cleaner_forecast) %>%
-  mutate(month = as.Date(month, "%Y-%m-%d"))
+  mutate(month = as.Date(month, "%Y-%m-%d")) %>%
+  mutate(category = factor(category, levels = c("Historical", "Forecast"))) # For plot legend ordering
 
 #------------------------VISUALISATION------------------------
 
@@ -80,12 +81,14 @@ p <- full_data %>%
   geom_line(aes(colour = category), stat = "identity", size = 1.5) +
   geom_ribbon(aes(ymin = the_lower, ymax = the_upper, x = month, fill = category), alpha = 0.3) +
   scale_x_date(labels = date_format("%b"), expand = c(0, 0)) +
-  labs(title = "GT",
+  labs(title = "ARIMA forecast of go card trips",
        caption = the_caption,
        x = "Date",
        y = "Go card tips",
        colour = NULL,
        fill = NULL) +
   facet_grid(. ~ year, scale = "free_x", switch = "x") +
+  scale_colour_manual(values = the_palette) +
+  scale_fill_manual(values = the_palette) +
   the_theme
 print(p)
