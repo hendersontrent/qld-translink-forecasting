@@ -92,3 +92,28 @@ p <- full_data %>%
   scale_fill_manual(values = the_palette) +
   the_theme
 print(p)
+
+#------------------------RESIDUALS----------------------------
+
+# Residuals over time
+
+res <- residuals(the_forecast)
+
+autoplot(res) + 
+  labs(title = "Residuals from ARIMA forecast",
+       x = "Month",
+       y = "") +
+  the_theme
+
+# Residuals histogram
+  
+gghistogram(res) + 
+  labs(title = "Histogram of residuals") +
+  the_theme
+
+# Autocorrelation function (ACF)
+
+ggAcf(res) + 
+  labs(title = "ACF of residuals") +
+  the_theme
+
