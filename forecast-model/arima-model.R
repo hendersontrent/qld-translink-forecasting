@@ -117,3 +117,7 @@ ggAcf(res) +
   labs(title = "ACF of residuals") +
   the_theme
 
+# Automated multiple output version
+
+checkresiduals(res)
+
