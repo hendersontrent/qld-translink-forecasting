@@ -5,8 +5,10 @@ This projects aims to see if a forecasting tool can be built on TransLink data.
 
 The Queensland Government open-sources a substantial amount of transit information. This information is quite detailed and is available in a time-series format. This drives the following questions:
 
-* What are the trends, seasons, and cycles?
+* What are the trends, seasons, and cycles, if any?
 * Can this data be forecast?
+* What is the best forecasting method?
+* Do regional or operational variables matter?
 
 ## Output
 
