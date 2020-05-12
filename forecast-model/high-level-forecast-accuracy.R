@@ -50,6 +50,7 @@ autoplot(window(filt_ts, c(2016,4))) +
        x = "Date",
        y = "Number of go card trips",
        colour = "Model type") +
+  scale_y_continuous(labels = comma) +
   the_theme
 
 #------------------------ERROR COMPARISONS--------------------
