@@ -36,6 +36,7 @@ p <- autoplot(filt_ts) +
        y = "Number of go card trips",
        caption = the_caption,
        colour = "Forecast type") +
+  scale_y_continuous(labels = comma) +
   the_theme +
   theme(legend.position = "bottom")
 print(p)
